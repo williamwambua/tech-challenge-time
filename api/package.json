@@ -1,0 +1,39 @@
+{
+  "name": "graphql_api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Session Tracker - GraphQL API",
+  "author": "William Wambua <william.wambua@outlook.com>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "start:watch": "nodemon --exec ts-node ./src/app.ts",
+    "start": "ts-node ./src/app.ts"
+  },
+  "dependencies": {
+    "@types/bluebird": "^3.5.27",
+    "@types/graphql": "^14.2.3",
+    "@types/sequelize": "^4.28.4",
+    "apollo-server-express": "^2.7.2",
+    "await-to-js": "^2.1.1",
+    "bcrypt": "^3.0.6",
+    "cors": "^2.8.5",
+    "dataloader-sequelize": "^2.0.1",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
+    "express-jwt": "^5.3.1",
+    "graphql": "^14.4.2",
+    "graphql-relay": "^0.6.0",
+    "graphql-sequelize": "^9.3.6",
+    "jsonwebtoken": "^8.5.1",
+    "mysql2": "^1.6.5",
+    "reflect-metadata": "^0.1.13",
+    "schemaglue": "^4.0.4",
+    "sequelize": "^5.21.3",
+    "sequelize-typescript": "^0.6.11",
+    "ts-node": "^8.5.4",
+    "tslint": "^5.18.0",
+    "typescript": "^3.7.4"
+  }
+}

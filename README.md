@@ -1,28 +1,39 @@
-# Pento tech challenge
+# Session Tracker
 
-Thanks for taking the time to do our tech challenge. 
+This is app enables the user to track sessions by capturing the name of the session, the time the session was started and the time the session was stopped.
 
-The challenge is to build a small full stack web app, that can help a freelancer track their time.
+## The Stack
 
-It should satisfy these user stories:
+The stack is composed of three layers:
 
-- As a user, I want to be able to start a time tracking session
-- As a user, I want to be able to stop a time tracking session
-- As a user, I want to be able to name my time tracking session
-- As a user, I want to be able to save my time tracking session when I am done with it
-- As a user, I want an overview of my sessions for the day, week and month
-- As a user, I want to be able to close my browser and shut down my computer and still have my sessions visible to me when I power it up again.
+### `1. Database server`
 
-## Getting started
+This is a mySQL database server running version 5.7. For the development environment (local), the automated deploy script (docker-compose) will create and configure a development database as per the provided environment variables i.e. MYSQL_DATABASE, MYSQL_USER, MYSQL_PASSWORD, and MYSQL_ROOT_PASSWORD.
 
-You can fork this repo and use the fork as a basis for your project. We don't have any requirements on what stack you use to solve the task, so there is nothing set up beforehand.
+### `2. GraphQL API Endpoint`
 
-## Timing
+This is a nodejs application exposing a graphQL endpoint via expressjs. Once deployed, the application will configure the database previously created with the application schema.
 
-- Don't spend more than a days work on this challenge. We're not looking for perfection, rather try to show us something special and have reasons for your decisions.
-- Get back to us when you have a timeline for when you are done.
+### `3. React App`
 
-## Notes
+This is the front-end of our stack and runs on an nginx server. Once started, users can create an account, login and start tracking sessions. The front-end is secured via a combination of user authentication via account login and a JWT authentication token which is appended to the user's application's session upon successful login.
 
- - This is technically possible to implement only on the frontend, but please take the opportunity to show your skills on the entire stack 
- - Please focus more on code quality, building a robust service and such, than on the UI.
+## Running the stack locally
+
+You can either deploy the stack locally using docker-compose or copy the application source files then compile and run them. <br>
+
+### `Option 1: Using docker-compose`
+
+Simply clone the repository and run `docker-compose up` or `docker-compose up --build` if you need to rebuild the stack's docker images. You will need to ensure that you have installed docker on your computer. That's it! To launch the application, open the url `http://localhost:9090` on your browser. 
+
+### `Option 2: Compiling and running the source files`
+
+Ensure that a local instance of mySQL server is running. Create the database, database user, and set the db user password. Add the three variables to the .env file located under `/api/.env`. <br>
+
+For the graphQL endpoint, run the command `npm install` under the `/api` directory to add the package dependencies of the application. Then follow this up by running `npm run start`. <br>
+
+Finally, for the react front-end application, run the command `yarn install` under the `/app` directory to add the package dependencies. Then follow this up by running `yarn start`. <br>
+
+Once `yarn start` successfully runs, copy and paste the link displayed on your terminal on to your browser to interact with the application. This will probably be `http://localhost:3000`.
+
+NB: For the local database to deploy successfully when using `Option 1`, you'll need to ensure that you are not already running an instance of mysql server on your PC.

@@ -1,0 +1,39 @@
+type Session {
+  id: Int
+  name: String
+  start: Date
+  end: Date
+  active: Boolean
+  user: User
+}
+
+scalar Date
+
+scalar JSON
+
+input SessionInput {
+  name: String
+  start: Date
+  end: Date
+  active: Boolean
+  updateStartDate: Boolean
+  userId: Int
+}
+
+type SessionMutationResponse {
+  affectedRows: Int!
+  returning: [Session!]!
+}
+
+type Query {
+  session(id: Int, limit: Int, offset: Int): Session @isAuth
+  sessions(userId: Int, limit: Int, skip: Int, sort_field: String, sort_order: String): [Session] @isAuth
+  activeSession(userId: Int, active: Boolean, limit: Int, skip: Int, sort_field: String, sort_order: String): Session @isAuth
+  }
+
+type Mutation {
+  createSession(data: SessionInput): Session @isAuth
+  updateSession(id: Int, data: SessionInput): Session @isAuth
+  closeSession(id: Int, data: SessionInput): Session @isAuth
+  deleteSession(id: Int): SessionMutationResponse @isAuth
+}
